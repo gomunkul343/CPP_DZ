@@ -1,3 +1,4 @@
+// BIGDOUBLE
 #include "BigDouble.hpp"
 
 std::ostream &operator<<(std::ostream &strm, BigDouble &BigDouble) {

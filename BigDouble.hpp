@@ -1,3 +1,4 @@
+// BIGDOUBLE
 #include "BigInt.hpp"
 
 #ifndef DISKRETKADZ3_BIGDOUBLE_HPP

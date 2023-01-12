@@ -1,3 +1,4 @@
+// примеры использования класса.
 #include "BigInt.hpp"
 #include "BigDouble.hpp"
 
