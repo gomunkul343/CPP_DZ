@@ -8,7 +8,7 @@ std::ostream &operator<<(std::ostream &strm, BigDouble &BigDouble) {
     }
     if (BigDouble.den.CheckZero(BigDouble.den)) {
         std::cout << "Divide by zero";
-        return strm;
+        exit(-1);
     }
     BigInt c;
     c = BigInt::NOD(BigDouble.num, BigDouble.den);
