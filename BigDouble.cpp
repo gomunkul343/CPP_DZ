@@ -63,13 +63,88 @@ BigDouble &BigDouble::operator--() {
 }
 
 BigDouble &BigDouble::operator++() {
-    return *this -= BigDouble(1, 1);
+    return *this += BigDouble(1, 1);
 }
 
-const BigDouble BigDouble::operator--(int) {
+BigDouble BigDouble::operator--(int) &{
     *this -= BigDouble(1, 1);
     return *this + BigDouble(1, 1);
 }
+
+BigDouble BigDouble::operator++(int) &{
+    *this += BigDouble(1, 1);
+    return *this - BigDouble(1, 1);
+}
+
+bool operator==(const BigDouble &left, const BigDouble &right) {
+    BigInt zero(0);
+    if (left.den == zero || right.den == zero) {
+        std::cout << "divide by zero" << std::endl;
+        exit(-3);
+    }
+    if (left.Sign() == right.Sign()) {
+        if (BigInt::CompareUnsigned(left.num * right.den, right.num * left.den)) {
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+
+bool operator<(const BigDouble &left, const BigDouble &right) {
+    BigInt zero(0);
+    if (left.den == zero || right.den == zero) {
+        std::cout << "divide by zero" << std::endl;
+        exit(-3);
+    }
+    if (!(left == right)) {
+        if (left.den == right.den) {
+            return left.num < right.num;
+        } else if (left.Sign() <= right.Sign()) {
+            BigInt num1;
+            num1 = BigInt::MultiplyWithoutSign(left.num, right.den);
+            BigInt num2;
+            num2 = BigInt::MultiplyWithoutSign(right.num, right.num);
+            return num1 < num2;
+        }
+    }
+    return false;
+}
+
+bool operator<=(const BigDouble &left, const BigDouble &right) {
+    if (left == right) {
+        return true;
+    }
+    if (left < right) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool operator>(const BigDouble &left, const BigDouble &right) {
+    if (!(left == right) && right < left) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool operator>=(const BigDouble &left, const BigDouble &right) {
+    if (left == right) {
+        return true;
+    }
+    if (left > right) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool BigDouble::Sign() const {
+    return num.GetSign() ^ den.GetSign();
+}
+
 
 
 

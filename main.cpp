@@ -12,6 +12,7 @@ int main() {
     num1--;
     num1++;
     ++num1;
+    std::cout << enternum1 << "!" << std::endl;
     std::cout << num1 << std::endl;
     BigInt sum = num1 + num2;
     std::cout << sum << std::endl;
@@ -25,9 +26,14 @@ int main() {
     std::string enterden2;
     std::cin >> enterden1 >> enterden2;
     BigDouble fract1(enternum1, enterden1);
+    BigDouble zero(1, 1);
+    std::cout << (fract1 > zero) << std::endl;
     fract1 += fract1;
     --fract1;
-    fract1 /= fract1;
+    fract1++;
+    ++fract1;
+    --fract1;
+    fract1--;
     std::cout << fract1 << std::endl;
     BigDouble fract2(enternum2, enterden2);
     fract1 = fract1 * fract2;

@@ -41,9 +41,23 @@ public:
 
     BigDouble &operator++();
 
-    const BigDouble operator--(int);
+    BigDouble operator--(int) &;
+
+    BigDouble operator++(int) &;
+
+    friend bool operator==(const BigDouble &left, const BigDouble &right);
+
+    friend bool operator<(const BigDouble &left, const BigDouble &right);
+
+    friend bool operator<=(const BigDouble &left, const BigDouble &right);
+
+    friend bool operator>(const BigDouble &left, const BigDouble &right);
+
+    friend bool operator>=(const BigDouble &left, const BigDouble &right);
 
     friend std::ostream &operator<<(std::ostream &strm, BigDouble &BigDouble);
+
+    bool Sign() const;
 
 private:
     BigInt num;

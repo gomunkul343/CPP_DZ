@@ -44,12 +44,12 @@ BigInt &BigInt::operator--() {
     return *this -= BigInt(1);
 }
 
-const BigInt BigInt::operator--(int) {
+BigInt BigInt::operator--(int) &{
     *this -= BigInt(1);
     return *this + BigInt(1);
 }
 
-const BigInt BigInt::operator++(int) {
+BigInt BigInt::operator++(int) &{
     *this += BigInt(1);
     return *this - BigInt(1);
 }
@@ -325,5 +325,29 @@ BigInt &BigInt::operator/=(const BigInt &value) {
 BigInt &BigInt::operator%=(const BigInt &value) {
     return *this = (*this % value);
 }
+
+bool BigInt::GetSign() const {
+    return sign;
+}
+
+BigInt BigInt::MultiplyWithoutSign(BigInt num, BigInt den) {
+    BigInt temp1 = std::move(num);
+    BigInt temp2 = std::move(den);
+    temp1.sign = false;
+    temp2.sign = false;
+    return temp1 * temp2;
+}
+
+bool BigInt::CompareUnsigned(BigInt num1, BigInt num2) {
+    BigInt temp1 = std::move(num1);
+    BigInt temp2 = std::move(num2);
+    temp1.sign = false;
+    temp2.sign = false;
+    if (temp1 == temp2) {
+        return true;
+    }
+    return false;
+}
+
 
 

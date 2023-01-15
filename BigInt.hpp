@@ -10,7 +10,7 @@ class BigInt {
 public:
     BigInt() {};
 
-    explicit BigInt(std::string &number) {
+    explicit BigInt(std::string number) {
         if (number[0] == '-') {
             number = number.substr(1);
             sign = true;
@@ -21,6 +21,7 @@ public:
             numbers_array.push_back(atoi((i < 9 ? number.substr(0, i) : number.substr(i - 9, 9)).c_str()));
         }
     }
+
     // Конструкторы с одним аргументом должны быть помечены как явные, чтобы избежать непреднамеренных неявных преобразований (Clang-tidy подсвечивал)
     explicit BigInt(int number) {
         if (number < 0) {
@@ -59,11 +60,11 @@ public:
     // инкремент и декремент
     BigInt &operator--();
 
-    const BigInt operator--(int);
+    BigInt operator--(int) &;
 
     BigInt &operator++();
 
-    const BigInt operator++(int);
+    BigInt operator++(int) &;
 
 
     // операторы сравнения
@@ -95,6 +96,12 @@ public:
     friend std::ostream &operator<<(std::ostream &strm, const BigInt &BigNum);
 
     friend BigInt operator%(const BigInt &left, const BigInt &right);
+
+    bool GetSign() const;
+
+    static BigInt MultiplyWithoutSign(BigInt num, BigInt den);
+
+    static bool CompareUnsigned(BigInt num1, BigInt num2);
 
 private:
     static const int base = 1000000000;
